@@ -1,5 +1,7 @@
 #!/bin/sh -l
 
+INPUT_SHORT_SHA_LENGTH=${INPUT_SHORT_SHA_LENGTH:-8}
+
 slug_ref() {
     echo "$1" \
          | tr "[:upper:]" "[:lower:]" \
@@ -9,7 +11,7 @@ slug_ref() {
 
 short_sha(){
   echo "$1" \
-        | cut -c1-8
+        | cut -c1-${INPUT_SHORT_SHA_LENGTH}
 }
 
 echo ::set-env name=GITHUB_REF_SLUG::"$(slug_ref "$GITHUB_REF")"
